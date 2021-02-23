@@ -18,10 +18,10 @@ export default new Vuex.Store({
   },
   mutations: {
     addTask(state) {
-      state.list.push(state.title);
+      state.list.push({ value: state.title });
       state.title = '';
     },
-    removeState(state, i) {
+    removeTask(state, i) {
       state.list.splice(i, 1);
     },
     setTitle(state, title) {

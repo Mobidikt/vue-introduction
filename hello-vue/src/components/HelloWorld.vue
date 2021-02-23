@@ -19,7 +19,7 @@
       <li><a href="https://news.vuejs.org" target="_blank" rel="noopener">News</a></li>
     </ul>
     <h3>Ecosystem</h3>
-    <input type='text' v-model.trim='title'>
+    <input type='text' :value='title' @input='setTitle($event.target.value)'>
     <button @click="addTask">Add Task</button>
     <ul>
       <li v-for="(item,i) in list" v-bind:key="i"  @dblclick='removeTask'> 
@@ -30,24 +30,15 @@
 </template>
 
 <script>
-
+import {mapState, mapMutations} from 'vuex';
 
 export default {
-  data(){
-    return {
-      list:[],
-      title: ''
-    }
+  computed:{
+    ...mapState(['title', 'list'])
   },
   methods:{
-    addTask(){
-      this.list.push({value: this.title})
-    },
-    removeTask(i){
-      this.list.splice(i,1);
-    }
+    ...mapMutations(['setTitle', 'addTask','removeTask'])
   },
-  
   name: 'HelloWorld',
   props: {
   }
