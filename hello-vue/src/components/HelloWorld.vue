@@ -21,9 +21,10 @@
     <h3>Ecosystem</h3>
     <input type='text' :value='title' @input='setTitle($event.target.value)'>
     <button @click="addTask">Add Task</button>
-    <ul>
-      <li v-for="(item,i) in list" v-bind:key="i"  @dblclick='removeTask'> 
+    <ul class='todo-list'>
+      <li class='todo' v-for="(item,i) in list" :key="i"  @dblclick='removeTask'> 
       {{item.value}}
+      <div class='city__img' :style="{backgroundImage: `url(${item.img})`}" >Capital city: {{item.capital_city}}</div>
       </li>
     </ul>
   </div>
