@@ -21,6 +21,8 @@
     <h3>Ecosystem</h3>
     <input type='text' :value='title' @input='setTitle($event.target.value)'>
     <button @click="addTask">Add Task</button>
+    <input type='text' :value='title' @input='setTitle($event.target.value)'>
+    <button v-if="validImage" v-on:click="validImage">Validation image</button>
     <ul class='todo-list'>
       <li class='todo' v-for="(item,i) in list" :key="i"  @dblclick='removeTask'> 
       {{item.value}}
@@ -31,13 +33,25 @@
 </template>
 
 <script>
+const src = 'https://fullhdpictures.com/wp-content/uploads/2015/03/Snow-Leopard-Full-HD-Wallpapers.jpg';
+
 import {mapState, mapMutations} from 'vuex';
+// import {checkImgSrc } from '../utils/validatImage.ts'
 
 export default {
   computed:{
     ...mapState(['title', 'list'])
+    
   },
   methods:{
+    validImage: function checkImgSrc() {
+      const img = new Image();
+    img.onload = function () { return true }
+    img.onerror = function () {console.log(false); return false }
+    img.src = src;
+    console.log('test')
+  }
+,
     ...mapMutations(['setTitle', 'addTask','removeTask'])
   },
   name: 'HelloWorld',
